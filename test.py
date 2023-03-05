@@ -1,4 +1,10 @@
-for n in range(2, 10):
-	print('first n : ', n)
-	for x in range(2, n):
-		print('x : ',x ,' n: ', n)
+temp = 4
+print(temp)
+
+match temp:
+    case 4:
+        print("wow!!!")
+    case 5:
+        print("false")
+    case _:
+        print("why")
