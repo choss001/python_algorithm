@@ -8,3 +8,9 @@ match temp:
         print("false")
     case _:
         print("why")
+
+for num in range(2, 10):
+	if num % 2 == 0:
+		print("Found an even number", num)
+		coutinue
+	print("Found an odd number", num)
