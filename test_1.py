@@ -2,7 +2,6 @@ year = 2016
 event = 'Referendum'
 f'Results of the {year} {event}'
 
-
 transposed = []
 for i in range(4):
     # the following 3 lines implement the nested listcomp
