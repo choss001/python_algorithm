@@ -9,3 +9,8 @@ elif x == 1:
 else:
     print('More')
     
+
+
+if __name__ == "__main__":
+    import sys
+    fib(int(sys.argv[1]))
