@@ -25,5 +25,7 @@ def solution(sequence, k):
         else:
             sdx += 1
 
-
     return [asdx - 1, aedx - 1]
+
+
+
