@@ -5,7 +5,7 @@ class Vertex:
         self.id = node
         self.adjacent = {}
         # Set distance to infinity for all nodes
-        self.distance = sys.maxint
+        self.distance = sys.maxsize
         # Mark all nodes unvisited        
         self.visited = False  
         # Predecessor
@@ -13,6 +13,9 @@ class Vertex:
 
     def add_neighbor(self, neighbor, weight=0):
         self.adjacent[neighbor] = weight
+        print(f'id : {self.id}, neighbor : {neighbor}, weight : {weight}', end='')
+        for key in self.adjacent.keys():
+            print(f'Vertex adjacent key : {key} , valus : {self.adjacent[key]}')
 
     def get_connections(self):
         return self.adjacent.keys()  
@@ -59,9 +62,13 @@ class Graph:
             return None
 
     def add_edge(self, frm, to, cost = 0):
+        print(f'add_edge : frm : {frm}, to : {to}, cost : {cost}')
+#       print(f'self.vert_dict : {self.vert_dict}')
         if frm not in self.vert_dict:
+            print('a')
             self.add_vertex(frm)
         if to not in self.vert_dict:
+            print('b')
             self.add_vertex(to)
 
         self.vert_dict[frm].add_neighbor(self.vert_dict[to], cost)
@@ -86,12 +93,13 @@ def shortest(v, path):
 import heapq
 
 def dijkstra(aGraph, start):
-    print '''Dijkstra's shortest path'''
+    print("Dijkstra's shortest path")
     # Set the distance for the start node to zero 
     start.set_distance(0)
 
     # Put tuple pair into the priority queue
     unvisited_queue = [(v.get_distance(),v) for v in aGraph]
+    print(f'unvisited_queu : {unvisited_queue}' )
     heapq.heapify(unvisited_queue)
 
     while len(unvisited_queue):
@@ -106,15 +114,14 @@ def dijkstra(aGraph, start):
             if next.visited:
                 continue
             new_dist = current.get_distance() + current.get_weight(next)
+            print(f'test = {type(new_dist)}')
             
             if new_dist < next.get_distance():
                 next.set_distance(new_dist)
                 next.set_previous(current)
-                print 'updated : current = %s next = %s new_dist = %s' \
-                        %(current.get_id(), next.get_id(), next.get_distance())
+                print(f'updated : current = {current.get_id()} next = {next.get_id()} new_dist = {next.get_distance()}')
             else:
-                print 'not updated : current = %s next = %s new_dist = %s' \
-                        %(current.get_id(), next.get_id(), next.get_distance())
+                print(f'not updated : current = {current.get_id()} next = {next.get_id()} new_dist = {next.get_distance()}')
 
         # Rebuild heap
         # 1. Pop every item
@@ -146,18 +153,17 @@ if __name__ == '__main__':
     g.add_edge('d', 'e', 6)
     g.add_edge('e', 'f', 9)
 
-    print 'Graph data:'
+    print(f'Graph data:')
     for v in g:
         for w in v.get_connections():
             vid = v.get_id()
             wid = w.get_id()
-            print '( %s , %s, %3d)'  % ( vid, wid, v.get_weight(w))
-
+            print(f' {vid} , {wid}, {v.get_weight(w)}')
             
-    dijkstra(g, g.get_vertex('a')) 
+#   dijkstra(g, g.get_vertex('a')) 
 
     target = g.get_vertex('e')
     path = [target.get_id()]
     shortest(target, path)
-    print 'The shortest path : %s' %(path[::-1])
+    print(f'The shortest path : {path[::-1]}')
  
