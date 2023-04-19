@@ -1,5 +1,7 @@
 import sys
 
+#https://www.bogotobogo.com/python/python_Dijkstras_Shortest_Path_Algorithm.php
+
 class Vertex:
     def __init__(self, node):
         self.id = node
@@ -13,9 +15,6 @@ class Vertex:
 
     def add_neighbor(self, neighbor, weight=0):
         self.adjacent[neighbor] = weight
-        print(f'id : {self.id}, neighbor : {neighbor}, weight : {weight}', end='')
-        for key in self.adjacent.keys():
-            print(f'Vertex adjacent key : {key} , valus : {self.adjacent[key]}')
 
     def get_connections(self):
         return self.adjacent.keys()  
@@ -41,6 +40,12 @@ class Vertex:
     def __str__(self):
         return str(self.id) + ' adjacent: ' + str([x.id for x in self.adjacent])
 
+    def __lt__(self, other):
+#       print('__lt__')
+#       print(f'{self} , {other}')
+#       print(f'{self.distance}, {other.distance}')
+        return self.distance < other.distance
+
 class Graph:
     def __init__(self):
         self.vert_dict = {}
@@ -62,13 +67,9 @@ class Graph:
             return None
 
     def add_edge(self, frm, to, cost = 0):
-        print(f'add_edge : frm : {frm}, to : {to}, cost : {cost}')
-#       print(f'self.vert_dict : {self.vert_dict}')
         if frm not in self.vert_dict:
-            print('a')
             self.add_vertex(frm)
         if to not in self.vert_dict:
-            print('b')
             self.add_vertex(to)
 
         self.vert_dict[frm].add_neighbor(self.vert_dict[to], cost)
@@ -99,7 +100,9 @@ def dijkstra(aGraph, start):
 
     # Put tuple pair into the priority queue
     unvisited_queue = [(v.get_distance(),v) for v in aGraph]
-    print(f'unvisited_queu : {unvisited_queue}' )
+#   for uv in unvisited_queue:
+#       print(f'{uv[0]} , {uv[1]}')
+
     heapq.heapify(unvisited_queue)
 
     while len(unvisited_queue):
@@ -114,15 +117,16 @@ def dijkstra(aGraph, start):
             if next.visited:
                 continue
             new_dist = current.get_distance() + current.get_weight(next)
-            print(f'test = {type(new_dist)}')
             
             if new_dist < next.get_distance():
+                print(f'{next.get_id()} {next.get_distance()}')
                 next.set_distance(new_dist)
                 next.set_previous(current)
                 print(f'updated : current = {current.get_id()} next = {next.get_id()} new_dist = {next.get_distance()}')
             else:
-                print(f'not updated : current = {current.get_id()} next = {next.get_id()} new_dist = {next.get_distance()}')
+                print(f'not updated : current = {current.get_id()} next = {next.get_id()} new_dist = {next.get_distance()} current_dis = {new_dist}')
 
+            print(f'{current.get_id()} dis = {current.get_distance()} {next.get_id()} dis = {next.get_distance()}')
         # Rebuild heap
         # 1. Pop every item
         while len(unvisited_queue):
@@ -160,7 +164,9 @@ if __name__ == '__main__':
             wid = w.get_id()
             print(f' {vid} , {wid}, {v.get_weight(w)}')
             
-#   dijkstra(g, g.get_vertex('a')) 
+    dijkstra(g, g.get_vertex('a')) 
+    for v in g:
+        print(f'id : {v.get_id()}, dis : {v.get_distance()}, prev : {v.previous}')
 
     target = g.get_vertex('e')
     path = [target.get_id()]
