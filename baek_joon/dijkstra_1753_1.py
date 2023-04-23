@@ -17,6 +17,7 @@ def dijstra(start):
 
     heapq.heappush(q, (0, start))
     distance[start] = 0
+    print(f'heapq = {heapq}')
     
     while q:
         dist, now = heapq.heappop(q)
