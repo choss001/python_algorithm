@@ -41,9 +41,6 @@ class Vertex:
         return str(self.id) + ' adjacent: ' + str([x.id for x in self.adjacent])
 
     def __lt__(self, other):
-#       print('__lt__')
-#       print(f'{self} , {other}')
-#       print(f'{self.distance}, {other.distance}')
         return self.distance < other.distance
 
 class Graph:
