@@ -3,10 +3,10 @@ import heapq
 N, M = map(int, input().split())
 
 graph = [[[] for _ in range(M+1)] for _ in range(N+1)]
-
 print(graph)
 
 dist = [[float('inf') for _ in range(M+1)] for _ in range(N+1)]
+print(dist)
 
 def dijkstra(start_x, start_y):
     dist[start_y][start_x] = 0
@@ -29,11 +29,15 @@ for i in range(N):
             graph[i+1][j].append((0, (j+1, i)))
             graph[i][j].append((1, (j+1, i+1)))
             graph[i+1][j+1].append((1, (j, i)))
+#           print(f'if statement graph  = {graph}')
         else:
             graph[i][j].append((0, (j+1, i+1)))
             graph[i+1][j+1].append((0, (j, i)))
             graph[i][j+1].append((1, (j, i+1)))
             graph[i+1][j].append((1, (j+1, i)))
+#           print(f'else statement graph  = {graph}')
+
+print('graph!!!!')
 for i in graph:
     for j in i:
         print(j)
@@ -43,3 +47,4 @@ if dist[N][M] == float('inf'):
     print('NO SOLUTION')
 else:
     print(dist[N][M])
+
