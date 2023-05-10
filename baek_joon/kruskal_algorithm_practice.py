@@ -37,3 +37,16 @@ p.sort()
 minimumCost = kruskal(p)
 
 print("Minimum cost is", minimumCost)
+
+010-92036157
+diquest 계정
+root
++고난쪽 webmanager tomcat, work tomcat work 
+directory autority check 
+diquest 계정
+
+
+ygg2468@skoinfo.co.kr
+
+관리자페이지 메뉴얼 & 재가동 메뉴얼
+
