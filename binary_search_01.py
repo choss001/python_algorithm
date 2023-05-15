@@ -6,3 +6,5 @@ mList = list(map(int, input().split()))
 nList.sort()
 
 
+
+i don't know what to do
