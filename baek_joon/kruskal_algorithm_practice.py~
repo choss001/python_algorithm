@@ -56,5 +56,3 @@ print(p)
 minimumCost = kruskal(p)
 
 print("Minimum cost is", minimumCost)
-
-print("Nothing")
