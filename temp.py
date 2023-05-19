@@ -22,3 +22,4 @@ def rmin(n):
         return total[n]
 print(rmin(n))
 print(total)
+print(temp)
