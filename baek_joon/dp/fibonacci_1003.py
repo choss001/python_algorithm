@@ -23,6 +23,7 @@ def fibonacci(n):
         elif dp[n-1][0] != -1 and dp[n-2][0] != -1:
             dp[n] = (dp[n-1][0] + dp[n-2][0], dp[n-1][1] + dp[n-2][1])
             return dp[n]
+
 N = int(input())
 
 temp_l = []
