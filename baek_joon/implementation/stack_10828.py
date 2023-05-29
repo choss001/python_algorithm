@@ -21,3 +21,5 @@ for statement in stack_list:
             print(-1)
         else:
             print(deq.pop())
+
+print('imase')
