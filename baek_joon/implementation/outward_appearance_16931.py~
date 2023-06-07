@@ -1,0 +1,23 @@
+import sys
+input = sys.stdin.readline
+
+N, M = map(int, input().split())
+
+two_dim_list = [list(map(int, input().split())) for _ in range(M)]
+
+rows_sum = 0
+for first_dim_list in two_dim_list:
+    for index in range(len(first_dim_list)):
+        if index == 0:
+            rows_sum += first_dim_list[index]
+        elif first_dim_list[index-1] < first_dim_list[index]:
+            rows_sum += abs(first_dim_list[index-1] - first_dim_list[index])
+
+columns_sum = 0
+for y in range(len(two_dim_list)):
+    for x in range(len(two_dim_list[0])):
+        if y == 0:
+            columns_sum += two_dim_list[y][x]
+        elif two_dim_list[y-1][x] < two_dim_list[y][x]:
+            columns_sum += abs(two_dim_list[y][x] - two_dim_list[y-1][x])
+print(f'answer = {rows_sum*2 + columns_sum*2 + M*N*2}')
