@@ -17,3 +17,4 @@ while N_list:
     del N_list[i]
     
 print('>',end='')
+print('test')
