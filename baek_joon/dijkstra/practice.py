@@ -33,6 +33,7 @@ def dijkstra(graph, start):
         distances[new_destination] = distance
         print()
         print(f'go through in if statement distances[new_desticnation] = {distances[new_destination]}')
+        print(f'distances = {distances}')
         heapq.heappush(queue, [distance, new_destination])  
     
   return distances
