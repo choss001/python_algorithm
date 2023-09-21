@@ -1,6 +1,6 @@
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(10*10^100)
+sys.setrecursionlimit(10**6)
 
 move_x = [0, 1, 0, -1]
 move_y = [-1, 0, 1, 0]
@@ -35,14 +35,17 @@ def graph_exam(height):
                     temp_answer += 1
                     visited_check[iy][ix] = 1
                     dfs(ix, iy, height, visited_check)
-
     return temp_answer
 
 answer = 0
-for value in range(max(max(input_list))):
+
+max_value = 0
+for max_value_candidate in input_list:
+    max_value = max(max(max_value_candidate), max_value)
+for value in range(max_value+1):
     answer = max(graph_exam(value), answer)
     
-print(f'{answer}')
+print(f'{1 if answer == 0 else answer}')
 
 
 
