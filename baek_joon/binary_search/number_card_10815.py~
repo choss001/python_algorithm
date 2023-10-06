@@ -1,0 +1,33 @@
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+n_lst = list(map(int, input().split()))
+m = int(input())
+m_lst = list(map(int, input().split()))
+
+n_lst.sort()
+#n_lst.insert(0, -999999999999)
+
+
+answer_lst = []
+for item in m_lst :
+    start = 0
+    end = len(n_lst)
+    while start <= end :
+        mid = (start+end) // 2
+        if mid < 0 or mid >= len(n_lst) :
+            break
+
+        if item > n_lst[mid] :
+            start = mid + 1
+        elif item < n_lst[mid] :
+            end = mid -1
+        else :
+            answer_lst.append("1")
+            break
+    mid = (start+end)//2
+    if start > end or (mid < 0 and mid >= len(n_lst)) :
+        answer_lst.append("0")
+print(f'{" ".join(answer_lst)}')
+
