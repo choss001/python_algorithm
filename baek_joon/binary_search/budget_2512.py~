@@ -13,11 +13,15 @@ while start <= end:
     mid = (start + end) //2
     temp_answer = 0
     for item in input_lst:
-        print(f'temp_answer = {item & mid}')
-        temp_answer += item & mid
+        if item >= mid:
+            temp_answer += mid
+        else:
+            temp_answer += item
 
+    print(f'temp_answer = {temp_answer}, m = {m}')
     if temp_answer > m:
         end = mid -1
     else:
         start = mid + 1
-print(f'start = {start}, mid = {mid}')
+    print(f'end = {end}, start = {start}')
+print(f'start = {start}, mid = {mid}, end = {end}')

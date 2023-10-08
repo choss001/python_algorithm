@@ -4,7 +4,6 @@ input = sys.stdin.readline
 n = int(input())
 input_lst = list(map(int, input().split()))
 m = int(input())
-print(f'n = {n}, input_lst = {input_lst}, m = {m}')
 
 start = 1
 end = max(input_lst)
@@ -18,8 +17,11 @@ while start <= end:
         else:
             temp_answer += item
 
+    #print(f'temp_answer = {temp_answer}, m = {m}')
     if temp_answer > m:
         end = mid -1
     else:
         start = mid + 1
-print(f'start = {start}, mid = {mid}')
+    #print(f'end = {end}, start = {start}')
+#print(f'start = {start}, mid = {mid}, end = {end}')
+print(f'{end}')
