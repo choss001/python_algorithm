@@ -23,17 +23,16 @@ for _ in range(M):
     a,b,c = map(int,input().split())
     graph[a].append((b,c))
 
-answer_graph = []
 answer = 0
+
+party_graph = []
+distance = [1e9] * (N+1)
+dijkstra(T)
+party_graph = distance[0:]
 for i in range(1,N+1):
     distance = [1e9] * (N+1)
     dijkstra(i)
-    answer_graph.append(distance[1:])
-for i in range(N):
-    #print(f'answer_graph[i][1]={answer_graph[i][1]}, answer_graph[1][i]={answer_graph[1][i]}')
-    if i!=1:
-        answer = max(answer, answer_graph[i][T-1]+answer_graph[T-1][i])
+    answer = max(answer, distance[T]+party_graph[i])
+    print(f'distance = {distance},i={i}, party_graph={party_graph}\
+            distance[{T}]={distance[T]}, party_graph[{i}]={party_graph[i]}')
 print(answer)
-
-#for i in range(N):
-    #print(answer_graph[i])
