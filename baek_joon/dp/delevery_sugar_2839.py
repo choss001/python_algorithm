@@ -1,0 +1,32 @@
+
+n = int(input())
+
+# 3과 5는 각각 한봉지씩 들수있기때문에 1로 초기화
+dp = [-1] * (n+1)
+dp[3] = 1
+dp[5] = 1
+
+if n <= 5:
+    print(dp[n])
+else:
+    for i in range(6, n + 1):
+        # b  :3키로 추가 전 무게의 봉투 최소값
+        a, b = dp[i], dp[i]
+         
+        print(f'{i}')
+        if dp[i - 5] != -1:
+            a = dp[i - 5]
+        if dp[i - 3] != -1:
+            b = dp[i - 3]
+            
+        if a > 0 and b > 0:
+            dp[i] = min(a + 1, b + 1)
+        elif a > 0 and b < 0:
+            dp[i] = a + 1
+        elif a < 0 and b > 0:
+            dp[i] = b + 1
+        else:
+            dp[i] = -1
+    
+    print(dp[n])
+    print(f'{dp}')
