@@ -18,5 +18,7 @@ def solution(n):
     
     return answer
 
-n = 3
+n = 4
 print(f'{solution(n)}')
+
+# https://ko.khanacademy.org/computing/computer-science/algorithms/towers-of-hanoi/e/move-three-disks-in-towers-of-hanoi
