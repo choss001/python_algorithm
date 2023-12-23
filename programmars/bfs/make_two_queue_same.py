@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from collections import deque
 
 def solution(queue1, queue2):
