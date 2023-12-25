@@ -1,24 +1,32 @@
 import sys
 input = sys.stdin.readline
 
-def solution(n, info):
-    temp_answer_lst = [-1] * 11
-    for i in range(11):
-        start = i
-        temp_n = n
-        for k in range(i,11):
-            print(f'start={start}, k={k}, n={n}, info[{k}] = {info[k]}')
-            if info[k] > temp_n:
-                print(f'i dont know what do to yet')
-                break
-            elif info[k] == temp_n:
-                print(f'equal info[{k}] == {n}')
-                break
-            else:
-                temp_answer_lst[start] += abs(10-k)
-                temp_n -= info[k]
-        print(f'temp_answer_lst = {temp_answer_lst}')
-    return -1
+#def solution(n, info):
+#    for i in range(11):
+#        temp_n = n
+#        for k in range(i,11):
+#            if info[i]
+#
+#
+#    return -1
+#n, info = 5, [2,1,1,1,0,0,0,0,0,0,0]	
+#solution(n,info)
 
-n, info = 5,[2,1,1,1,0,0,0,0,0,0,0] 
-print(solution(n, info))
+def solution(size):
+    def dfs(idx, lst):
+        if idx == size:
+            return lst
+        for i in range(idx+1, size):
+            lst[idx] =1
+            print(f'lst = {lst}')
+            lst = dfs(i, lst)
+            lst[idx] =0
+            print(f'lst = {lst}')
+            lst = dfs(i, lst)
+        return lst 
+    lst = [0] * size
+    dfs(0,lst)
+    return -1
+size = 3
+print(solution(size))
+
