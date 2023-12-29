@@ -38,7 +38,6 @@ def solution(n, info):
             dfs(m+1, i)
             ryan[i] -= 1
 
-
     dfs(0, 0)
 
     return answer if answer else [-1]
