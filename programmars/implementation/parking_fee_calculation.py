@@ -4,7 +4,8 @@ input = sys.stdin.readline
 def solution(fees, records):
     dic = {}
     dic_sort_car_num = []
-    result 
+    result_dic = {}
+    answer = []
     for item in records:
         temp_record = item.split(' ')
         if temp_record[1] not in dic:
@@ -13,11 +14,17 @@ def solution(fees, records):
         else:
             dic[temp_record[1]].append((temp_record[0], temp_record[2]))
     dic_sort_car_num.sort()
+    print(f'temp = {dic_sort_car_num}')
     for k,v in dic.items():
-        result = math.ceil((calculate_fee(v)-fees[0])/10)*fees[3] + fees[1]
-        print( result if result > 5000 else 5000)
-
-    return -1
+        print(f'k={k}   ',end='')
+        result = math.ceil((calculate_fee(v)-fees[0])/fees[2])*fees[3] + fees[1]
+        print(f'calulate_fee ={calculate_fee(v)}')
+        result = result if result > fees[1] else fees[1]
+        result_dic[k] = result
+        print( result if result > fees[1] else fees[1])
+    for i in dic_sort_car_num:
+        answer.append(result_dic[i])
+    return answer
 def minus_time(before, after):
     after = list(map(int, after.split(':')))
     before = list(map(int, before.split(':')))
@@ -38,5 +45,9 @@ def calculate_fee(lst):
     return temp
 
 
-fees, records = [180, 5000, 10, 600], ["05:34 5961 IN", "06:00 0000 IN", "06:34 0000 OUT", "07:59 5961 OUT", "07:59 0148 IN", "18:59 0000 IN", "19:09 0148 OUT", "22:59 5961 IN", "23:00 5961 OUT"]
+#fees, records = [180, 5000, 10, 600], ["05:34 5961 IN", "06:00 0000 IN", "06:34 0000 OUT", "07:59 5961 OUT", "07:59 0148 IN", "18:59 0000 IN", "19:09 0148 OUT", "22:59 5961 IN", "23:00 5961 OUT"]
+
+#fees, records = [120, 0, 60, 591], ["16:00 3961 IN","16:00 0202 IN","18:00 3961 OUT","18:00 0202 OUT","23:58 3961 IN"]
+
+fees, records = [1, 461, 1, 10],["00:00 1234 IN"]
 print(solution(fees, records))
