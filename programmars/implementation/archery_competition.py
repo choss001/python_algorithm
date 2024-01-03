@@ -7,9 +7,10 @@ def solution(n, info):
     def dfs(m, idx):
         nonlocal answer, diff, ryan
 
-        print(f'answer = {answer}, diff={diff}, ryan={ryan}, m={m}, idx={idx}')
+        #print(f'answer = {answer}, diff={diff}, ryan={ryan}, m={m}, idx={idx}')
         if m == n:
             r, a = 0, 0
+            print(f'ryan={ryan}, m={m}, idx={idx}')
 
             for j in range(11):
                 if ryan[j] > info[j]:
@@ -17,7 +18,7 @@ def solution(n, info):
                 elif 0 != info[j] and ryan[j] <= info[j]:
                     a += 10-j
                     
-            print(f'r={r}, a={a}')
+            #print(f'r={r}, a={a}')
             if r > a:
                 if diff < r - a:
                     diff = r - a
@@ -32,7 +33,7 @@ def solution(n, info):
                             break
             return
 
-        print(f'm={m}')
+        #print(f'm={m}')
         for i in range(idx, 11):
             ryan[i] += 1
             dfs(m+1, i)
