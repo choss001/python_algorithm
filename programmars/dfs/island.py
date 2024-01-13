@@ -1,0 +1,44 @@
+import sys
+
+mx = [0,1,0,-1]
+my = [-1,0,1,0]
+
+def dfs(y,x,maps,visited,maps_sum):
+    y_length = len(maps)
+    x_length = len(maps[0])
+    maps_sum += int(maps[y][x])
+    visited[y][x] = 1
+    print(f'maps={maps[y][x]},y={y},x={x},maps_sum={maps_sum}')
+    for i in range(y_length):
+        print(visited[i])
+
+    for i in range(4):
+        dy = y+my[i]
+        dx = x+mx[i]
+
+        if dy <0 or dy >= y_length or\
+            dx < 0 or dx >= x_length or\
+            visited[dy][dx] != -1 or\
+            maps[dy][dx] == 'X':
+                continue
+        maps_sum = dfs(dy,dx,maps,visited,maps_sum)
+    return maps_sum
+
+
+def solution(maps):
+    y_length = len(maps)
+    x_length = len(maps[0])
+    answer_lst = []
+
+    visited = [[-1] * x_length for _ in range(y_length)]
+    for k in range(y_length):
+        for l in range(x_length):
+            if maps[k][l] != 'X' and visited[k][l] == -1:
+                temp_sum = (dfs(k,l,maps,visited,0))
+                answer_lst.append(temp_sum)
+                print(f'temp_sum = {temp_sum}')
+    for i in range(y_length):
+        print(visited[i])
+    return answer_lst
+maps = ["X591X","X1X5X","X231X", "1XXX1"]
+print(solution(maps))
