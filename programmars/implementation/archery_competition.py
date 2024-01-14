@@ -1,34 +1,46 @@
-import sys
-input = sys.stdin.readline
+def solution(n, info):
+    answer = []
+    ryan = [0]*11
+    diff = 0
 
-#def solution(n, info):
-#    for i in range(11):
-#        temp_n = n
-#        for k in range(i,11):
-#            if info[i]
-#
-#
-#    return -1
-#n, info = 5, [2,1,1,1,0,0,0,0,0,0,0]	
-#solution(n,info)
+    def dfs(m, idx):
+        nonlocal answer, diff, ryan
 
-def solution(size):
-    def dfs(idx, lst,temp_lst):
-        print(f'idx={idx}, size={size}')
-        if idx == size-1:
-            lst.append(temp_lst.copy())
-            print(f'lst = {lst}')
-            return lst
-        for i in range(idx+1, size):
-            temp_lst[idx] =1
-            print(f'temp_lst = {temp_lst}')
-            lst = dfs(i, lst, temp_lst.copy())
-            temp_lst[idx] =0
-            lst = dfs(i, lst, temp_lst.copy())
-        return lst 
-    temp_lst = [0] * size
-    dfs(0,[], temp_lst)
-    return -1
-size = 3
-print(solution(size))
+        #print(f'answer = {answer}, diff={diff}, ryan={ryan}, m={m}, idx={idx}')
+        if m == n:
+            r, a = 0, 0
+            print(f'ryan={ryan}, m={m}, idx={idx}')
 
+            for j in range(11):
+                if ryan[j] > info[j]:
+                    r += 10-j
+                elif 0 != info[j] and ryan[j] <= info[j]:
+                    a += 10-j
+                    
+            #print(f'r={r}, a={a}')
+            if r > a:
+                if diff < r - a:
+                    diff = r - a
+                    answer = ryan[:]
+                    
+                elif diff == r - a:
+                    for i in range(10, -1, -1):
+                        if ryan[i] < answer[i]:
+                            break
+                        if ryan[i] > answer[i]:
+                            answer = ryan[:]
+                            break
+            return
+
+        #print(f'm={m}')
+        for i in range(idx, 11):
+            ryan[i] += 1
+            dfs(m+1, i)
+            ryan[i] -= 1
+
+    dfs(0, 0)
+
+    return answer if answer else [-1]
+
+n, info = 5, [2,1,1,1,0,0,0,0,0,0,0]
+print(f'solution = {solution(n, info)}')
