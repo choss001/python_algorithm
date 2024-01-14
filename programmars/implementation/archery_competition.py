@@ -13,19 +13,21 @@ input = sys.stdin.readline
 #solution(n,info)
 
 def solution(size):
-    def dfs(idx, lst):
-        if idx == size:
+    def dfs(idx, lst,temp_lst):
+        print(f'idx={idx}, size={size}')
+        if idx == size-1:
+            lst.append(temp_lst.copy())
+            print(f'lst = {lst}')
             return lst
         for i in range(idx+1, size):
-            lst[idx] =1
-            print(f'lst = {lst}')
-            lst = dfs(i, lst)
-            lst[idx] =0
-            print(f'lst = {lst}')
-            lst = dfs(i, lst)
+            temp_lst[idx] =1
+            print(f'temp_lst = {temp_lst}')
+            lst = dfs(i, lst, temp_lst.copy())
+            temp_lst[idx] =0
+            lst = dfs(i, lst, temp_lst.copy())
         return lst 
-    lst = [0] * size
-    dfs(0,lst)
+    temp_lst = [0] * size
+    dfs(0,[], temp_lst)
     return -1
 size = 3
 print(solution(size))
