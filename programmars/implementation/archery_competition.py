@@ -1,4 +1,3 @@
-
 def solution(n, info):
     answer = []
     ryan = [0]*11
