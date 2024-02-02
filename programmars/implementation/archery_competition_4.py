@@ -41,19 +41,24 @@ def checker(result):
         print(f'result = {result}')
         temp_high_score = result[0][1]
 
-        temp_a = 0
+        temp_a = [[0]*11,0]
+        print(f'temp_a[0] = {temp_a[0]}')
         temp_result = []
         print(f'temp_high_score = {temp_high_score}')
     
         for item in result:
+            if item[1] < temp_high_score:
+                continue
             item = item[0]
             print(f'item = {item}')
             for i in range(10, -1, -1):
-                print(f'i = {i}')
-                if item[i] and item[i] > temp_a:
+                print(f'item[i] = {item[i]}, temp_a[0][i] = {temp_a[0][i]} ')
+                if item[i] == 0 and temp_a[0][i] == 0:
+                    continue
+                if item[i] > temp_a[0][i]:
                     temp_result = item
-                    temp_a = (i,item[i])
-                    break
+                    temp_a = (item,i)
+                break
         result = temp_result
 
     return result
@@ -65,14 +70,14 @@ def solution(n, info):
             info_sum += 10-i
 
     result = dfs([0]*11, [], 0, n, info, 0, info_sum)
+    if not result:
+        return [-1]
+
     result.sort(key=lambda x : (-x[1], x[0]))
 
-    result = checker(result)
-    print(f'result = {result}')
-
-    for item in result:
-        print(item)
-    return result[0][0] if result else [-1]
+    #result = checker(result)
+    return checker(result)
+    #return result[0][0] if result else [-1]
 
 #n, info = 5, [2,1,1,1,0,0,0,0,0,0,0]
 #n, info = 1, [1,0,0,0,0,0,0,0,0,0,0]
