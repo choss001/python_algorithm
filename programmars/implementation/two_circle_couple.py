@@ -1,0 +1,22 @@
+import sys
+import math
+
+def solution(r1, r2):
+    answer = 0
+    for i in range(1, r2+1):
+        r2_range = math.floor(math.sqrt(r2**2 - i**2))
+        #print(f'true r2_range={math.sqrt(r2**2-i**2)}')
+
+        r1_range = 0
+        if r1 > i:
+            #print(f'true r1_range={math.sqrt(r1**2-i**2)}')
+            r1_range = math.ceil(math.sqrt(r1**2 - i**2))
+
+        #print(f'r2_range={r2_range}, r1_range={r1_range}, i = {i}')
+        answer += r2_range-r1_range+1
+    answer*=4
+    return answer
+    
+
+r1,r2=2,3
+#print(solution(r1,r2))
