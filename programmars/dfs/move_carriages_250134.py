@@ -1,4 +1,6 @@
+
 def solution(maze):
+    f = open("test.txt", "w")
     answer = 99999999
     move = [(-1,0),(0,1),(1,0),(0,-1)]
     start_r = [0,0]
@@ -21,16 +23,20 @@ def solution(maze):
         if maze[start_r[0]][start_r[1]] == 3 and \
                 maze[start_b[0]][start_b[1]] == 4:
                     answer = min(answer, count)
-                    print(f' answer = {answer}, count = {count}, start_r={start_r}, start_b={start_b}')
+                    #print(f' answer = {answer}, count = {count}, start_r={start_r}, start_b={start_b}')
                     return
 
-        print()
-        print(f'svr, {start_r}' )
+        #print()
+        f.write(f'svr, {start_r}\n')
+        #print(f'svr, {start_r}' )
         for v in v_r:
-            print(v)
-        print(f'svb, {start_b}')
+            #print(v)
+            f.write(f'{str(v)}\n')
+        f.write(f'svb, {start_b}\n')
+        #print(f'svb, {start_b}')
         for v in v_b:
-            print(v)
+            #print(v)
+            f.write(f'{str(v)}\n')
 
         for i in range(4):
             d_r = [start_r[0] + move[i][0], start_r[1] + move[i][1]]
@@ -40,13 +46,15 @@ def solution(maze):
             if not (0 <= d_r[1] < len(maze[0])): continue
             if v_r[d_r[0]][d_r[1]] and maze[d_r[0]][d_r[1]] != 3 : continue
             if maze[d_r[0]][d_r[1]] == 5: continue
-            if d_r[0] == start_b[0] and d_r[1] == start_b[1]: continue
             for j in range(4):
                 d_b = [start_b[0] + move[j][0], start_b[1] + move[j][1]]
                 if maze[start_b[0]][start_b[1]] == 4: d_b = start_b[0], start_b[1]
                 if not (0 <= d_b[0] < len(maze)): continue
                 if not (0 <= d_b[1] < len(maze[0])): continue
                 if v_b[d_b[0]][d_b[1]] and maze[d_b[0]][d_b[1]] != 4: continue
+                if maze[d_b[0]][d_b[1]] == 5: continue
+                if d_r[0] == start_b[0] and d_r[1] == start_b[1] and d_b[0] == start_r[0] and d_b[1] == start_r[1]: continue
+                if d_r[0] == d_b[0] and d_r[1] == d_b[1]: continue
                 print(f'entrace before = d_r = {d_r}, d_b = {d_b}')
                 dfs(d_r, d_b, count + 1)
                 v_r[d_r[0]][d_r[1]] = False
@@ -60,3 +68,17 @@ def solution(maze):
 maze = [[1, 0, 2], [0, 0, 0], [5, 0, 5], [4, 0, 3]]
 print(solution(maze))
 
+
+#######################################################################################################################
+
+#m0
+#
+#[1,0,2] [0,1,0] [0,0,1] [0,2,0] [2,0,0] [0,0,0]
+#[0,0,0] [0,0,2] [0,2,0] [0,0,1] [0,1,0] [2,0,0]
+#[5,0,5] [5,0,5] [5,0,5] [5,0,5] [5,0,5] [5,1,5]
+#[4,0,3] [4,0,3] [4,0,3] [4,0,3] [4,0,3] [4,0,3]
+
+#[2,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0]
+#[0,1,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0]
+#[5,0,5] [5,0,5] [5,0,5] [5,0,5] [5,0,5] [5,0,5] [5,0,5] [5,0,5]
+#[4,0,3] [4,0,3] [4,0,3] [4,0,3] [4,0,3] [4,0,3] [4,0,3] [4,0,3]
