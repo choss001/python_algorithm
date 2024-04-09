@@ -1,5 +1,6 @@
 
 def solution(maze):
+    dic = {}
     f = open("test.txt", "w")
     answer = 99999999
     move = [(-1,0),(0,1),(1,0),(0,-1)]
@@ -17,17 +18,18 @@ def solution(maze):
 
     def dfs(start_r, start_b, count):
         nonlocal answer
+        nonlocal dic
         v_r[start_r[0]][start_r[1]] = True
         v_b[start_b[0]][start_b[1]] = True
         
         if maze[start_r[0]][start_r[1]] == 3 and \
                 maze[start_b[0]][start_b[1]] == 4:
                     answer = min(answer, count)
-                    #print(f' answer = {answer}, count = {count}, start_r={start_r}, start_b={start_b}')
+                    f.write(f' answer = {answer}, count = {count}, start_r={start_r}, start_b={start_b}')
                     return
 
-        #print()
-        f.write(f'svr, {start_r}\n')
+        f.write(f'\n')
+        f.write(f'svr, {start_r}, count={count}\n')
         #print(f'svr, {start_r}' )
         for v in v_r:
             #print(v)
@@ -55,13 +57,17 @@ def solution(maze):
                 if maze[d_b[0]][d_b[1]] == 5: continue
                 if d_r[0] == start_b[0] and d_r[1] == start_b[1] and d_b[0] == start_r[0] and d_b[1] == start_r[1]: continue
                 if d_r[0] == d_b[0] and d_r[1] == d_b[1]: continue
+                if  not in dic:
+                    dic[(),d_b,count] = True
+                print(f'dic={dic}')                    
                 print(f'entrace before = d_r = {d_r}, d_b = {d_b}')
                 dfs(d_r, d_b, count + 1)
                 v_r[d_r[0]][d_r[1]] = False
                 v_b[d_b[0]][d_b[1]] = False
 
     dfs(start_r, start_b, 0)
-
+    f.write(f'answer = {answer}')
+    f.close()
     return answer if answer != 99999999 else 0
 
 #maze = [[1, 4], [0, 0], [2, 3]]
@@ -71,14 +77,17 @@ print(solution(maze))
 
 #######################################################################################################################
 
-#m0
-#
 #[1,0,2] [0,1,0] [0,0,1] [0,2,0] [2,0,0] [0,0,0]
 #[0,0,0] [0,0,2] [0,2,0] [0,0,1] [0,1,0] [2,0,0]
 #[5,0,5] [5,0,5] [5,0,5] [5,0,5] [5,0,5] [5,1,5]
 #[4,0,3] [4,0,3] [4,0,3] [4,0,3] [4,0,3] [4,0,3]
 
-#[2,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0]
-#[0,1,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0]
-#[5,0,5] [5,0,5] [5,0,5] [5,0,5] [5,0,5] [5,0,5] [5,0,5] [5,0,5]
-#[4,0,3] [4,0,3] [4,0,3] [4,0,3] [4,0,3] [4,0,3] [4,0,3] [4,0,3]
+#[0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0]
+#[0,0,1] [0,1,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0]
+#[5,2,5] [5,0,5] [5,1,5] [5,1,5] [5,0,5] [5,0,5] [5,0,5] [5,0,5]
+#[4,0,3] [4,2,3] [4,0,2] [2,0,3] [4,0,3] [4,0,3] [4,0,3] [4,0,3]
+
+#[1,0,2] [0,2,0] [2,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0] [0,0,0]
+#[0,0,0] [1,0,0] [0,1,0] [2,0,0] [0,2,0] [0,0,0] [0,0,0] [0,0,0]
+#[5,0,5] [5,0,5] [5,0,5] [5,1,5] [5,0,5] [5,2,5] [5,0,5] [5,0,5]
+#[4,0,3] [4,0,3] [4,0,3] [4,0,3] [4,1,3] [4,0,1] [4,2,1] [2,0,1]
